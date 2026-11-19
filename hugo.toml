@@ -1,0 +1,24 @@
+baseURL = "https://chapi.to/"
+title = "Chapitô"
+locale = "fr-FR"
+defaultContentLanguage = "fr"
+# /solutions.html (servi en /solutions par les hébergeurs statiques, comme sur Webflow)
+uglyURLs = true
+disableKinds = ["RSS", "taxonomy", "term", "section"]
+enableRobotsTXT = true
+disableHugoGeneratorInject = true
+
+[security]
+# Hugo >= 0.164 refuse par défaut les pages de contenu en HTML
+allowContent = ["^text/(markdown|html)$"]
+
+[frontmatter]
+lastmod = [":fileModTime"]
+
+[params]
+wfSite = "669562b12cd180ce7d9ce6fc"
+ogImage = "/assets/img/og-chapito.jpg"
+gaId = "G-WSM1VGGERH"
+calDemo = "https://cal.com/nicolasdm/chapito"
+# URL d'action du formulaire Brevo (https://….sibforms.com/serve/…) ; vide = pop-up newsletter masquée
+brevoFormAction = ""

@@ -1,0 +1,29 @@
+/* Ajustements propres au site statique (chargés après le CSS Webflow). */
+
+/* Titres rétrogradés (un seul h1 par page) : même rendu que l'ancien h1.
+   :where() garde la spécificité d'un sélecteur d'élément, les classes Webflow restent prioritaires. */
+h2:where(.h1-look), div:where(.h1-look) { margin-top: 20px; margin-bottom: 10px; font-size: 38px; line-height: 44px; font-weight: 700; }
+
+/* Texte réservé aux lecteurs d'écran */
+.sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+/* Lien d'évitement : visible seulement au focus clavier */
+.skip-link { position: absolute; left: 1rem; top: -100px; z-index: 10000; padding: .75rem 1.25rem; border-radius: 8px; background: #111; color: #fff; font-weight: 600; text-decoration: none; }
+.skip-link:focus { top: 1rem; }
+
+/* L'en-tête collant (bandeau + menu) ne doit pas masquer l'élément qui reçoit le focus */
+html { scroll-padding-top: 100px; }
+
+/* /realisations : cases de filtre masquées par Webflow (display:none) mais nécessaires au clavier */
+.w-checkbox-input.tags-chekbox { display: block; position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
+.tag-chekbox-field:has(.tags-chekbox:focus-visible) { outline: 2px solid #0f59be; outline-offset: 2px; }
+
+/* Éléments rendus activables au clavier (role="button") : focus visible */
+[role="button"]:focus-visible, .client-card:focus-visible { outline: 2px solid #0f59be; outline-offset: 3px; }
+
+/* Réduction des animations demandée par le système : les interactions Webflow sont neutralisées
+   par data-wf-ix-vacation (sur <body>), les défilements CSS des pages partenaires sont arrêtés ici. */
+@media (prefers-reduced-motion: reduce) {
+  .scrolling-container { animation: none !important; }
+  html { scroll-behavior: auto; }
+}

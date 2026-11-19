@@ -1,0 +1,6 @@
+{{- $path := strings.TrimSuffix ".html" .Page.RelPermalink -}}
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8"><title>{{ .Page.Title }}</title>
+<link rel="canonical" href="{{ strings.TrimSuffix "/" site.BaseURL }}{{ $path }}"><meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url={{ $path }}"></head>
+<body><a href="{{ $path }}">{{ .Page.Title }}</a></body></html>

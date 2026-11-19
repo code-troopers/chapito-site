@@ -1,0 +1,7 @@
+public/
+resources/
+.hugo_build.lock
+import/
+.impeccable/
+TICKETS.md
+__pycache__/

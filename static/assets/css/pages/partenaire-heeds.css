@@ -1,0 +1,50 @@
+/* 1. Reset des marges pour éviter le blanc */
+.scroll-wrapper {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100%;
+  overflow: hidden;
+  background: transparent;
+  line-height: 0; /* Supprime l'espace sous les images */
+}
+
+/* 2. Le container qui défile */
+.scrolling-container {
+  display: flex;
+  width: max-content;
+  animation: scroll 45s linear infinite;
+  will-change: transform; /* Améliore la fluidité */
+}
+
+/* 3. Les groupes d'images */
+.scroll-group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.scroll-group img {
+  height: 350px; /* Ajuste la taille des téléphones ici */
+  width: auto;
+  margin-right: 20px; /* Espacement entre les téléphones */
+  display: block;
+  flex-shrink: 0;
+  pointer-events: none; /* Empêche le drag des images */
+}
+
+/* 4. L'animation infinie */
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* 5. Ajustements pour Mobile */
+@media (max-width: 479px) {
+  .scroll-group img {
+    height: 250px; /* Téléphones un peu plus petits sur mobile */
+    margin-right: 10px;
+  }
+  .scrolling-container {
+    animation-duration: 35s; /* Un peu plus rapide car moins de distance */
+  }
+}

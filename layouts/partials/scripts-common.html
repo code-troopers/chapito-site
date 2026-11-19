@@ -1,0 +1,85 @@
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const yearSpan = document.getElementById('year');
+    const currentYear = new Date().getFullYear();
+    if (yearSpan) yearSpan.textContent = currentYear;
+  });
+</script>
+<style>
+.button.is-secondary.cta-button {
+  position: relative;
+  background: radial-gradient(circle at 50% 0, #d7f6f4, #1f8fff 37%, #0f59be 76%);
+  box-shadow: inset -2px -2px 8px 0 #134d95, inset 2px 2px 4px 0 hsla(177.6, 59.06%, 75.10%, 0.80), inset 0 2px 1px 0 hsla(0, 0.00%, 100.00%, 0.50);
+  transition: background 0.3s ease, background-position 0.7s ease; /* Smooth transition */
+}
+
+.button.is-secondary.cta-button[data-active="true"] {
+  background: radial-gradient(circle at var(--x) var(--y), #d7f6f4, #1f8fff 37%, #0f59be 76%);
+}
+
+.button.is-secondary.cta-button:hover {
+  background-color: transparent; /* Remove the background color on hover */
+}
+
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const buttons = document.querySelectorAll('.button.is-secondary.cta-button');
+
+  buttons.forEach(button => {
+    let lastX = '50%';
+    let lastY = '50%';
+
+    button.addEventListener('mousemove', function(e) {
+      const rect = button.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      lastX = `${x}px`;
+      lastY = `${y}px`;
+      button.style.setProperty('--x', lastX);
+      button.style.setProperty('--y', lastY);
+      button.setAttribute('data-active', 'true');
+    });
+
+    button.addEventListener('mouseleave', function() {
+      button.setAttribute('data-active', 'true');
+    });
+
+    button.addEventListener('mouseenter', function(e) {
+      button.style.transition = 'background-position 0.7s ease'; // Ensure transition is applied
+      button.style.setProperty('--x', lastX);
+      button.style.setProperty('--y', lastY);
+
+      // After setting the last position, immediately update to the new position
+      requestAnimationFrame(() => {
+        const rect = button.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        button.style.setProperty('--x', `${x}px`);
+        button.style.setProperty('--y', `${y}px`);
+      });
+    });
+
+    button.addEventListener('mouseleave', function() {
+      button.style.transition = 'none'; // Disable transition to avoid jumpy effects
+    });
+  });
+});
+
+
+</script>
+<script src="/assets/vendor/js.cookie.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (!Cookies.get('POPUP_NEWSLETTER')) {
+      setTimeout(function(){
+      const popupElement = document.querySelector('.popup-overlay');
+      if (popupElement) {
+          popupElement.style.display = "flex";
+          Cookies.set('POPUP_NEWSLETTER', true, { expires: 30*6 });
+      }
+      }, 30000);
+    }
+  });
+</script>

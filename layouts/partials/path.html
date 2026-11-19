@@ -1,0 +1,3 @@
+{{- /* Adresse propre de la page : /solutions.html → /solutions, /index.html → / */ -}}
+{{- $path := strings.TrimSuffix ".html" .RelPermalink -}}
+{{- return cond (eq $path "/index") "/" $path -}}

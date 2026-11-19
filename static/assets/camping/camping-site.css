@@ -1,0 +1,13 @@
+/* Ajustements de la landing camping intégrée au site (menu Webflow au lieu de l'en-tête fixe d'origine) */
+.camping-page .hero { padding-top: 90px; min-height: 0; }
+.camping-page .video-todo-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 64px; align-items: center; }
+.camping-page .camping-video { border-radius: 28px; overflow: hidden; box-shadow: 0 30px 80px rgba(5, 37, 56, .18); background: #0b0b0d; aspect-ratio: 16 / 9; }
+.camping-page .camping-video video { display: block; width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 991px) {
+  .camping-page .video-todo-layout { grid-template-columns: 1fr; gap: 32px; }
+}
+
+/* La règle .button de Webflow (flex-flow: column) s'appliquait aussi aux boutons de la page camping :
+   la flèche de « Programmer une démo » passait à la ligne en mobile. */
+.camping-page .button { flex-direction: row; }
+.camping-page .contact-demo-button span { flex: none; }

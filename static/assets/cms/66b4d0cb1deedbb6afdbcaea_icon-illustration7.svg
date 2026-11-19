@@ -1,0 +1,34 @@
+<svg width="106" height="105" viewBox="0 0 106 105" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_dd_11263_111715)">
+<rect x="9.99902" y="8" width="86" height="86" rx="20.3816" fill="url(#paint0_radial_11263_111715)"/>
+<g clip-path="url(#clip0_11263_111715)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M59.4741 47.021L69.7399 32.042C70.7118 30.6378 70.7118 28.7654 69.7399 27.3611C68.7259 25.8845 67.0556 25.0079 65.2802 25.0206H40.6253C38.8835 25.0206 37.2511 25.876 36.2497 27.3186C35.2905 28.7271 35.2905 30.591 36.2497 31.9995L62.5033 70.5959H43.4442L50.1338 60.8085L46.3473 55.1914L36.2497 69.9576C35.2905 71.3661 35.2905 73.23 36.2497 74.6385C37.2426 76.0981 38.8751 76.9705 40.6253 76.979H65.2802C67.0304 76.9705 68.6628 76.0981 69.6558 74.6385C70.615 73.23 70.615 71.3661 69.6558 69.9576L43.4442 31.4463H62.5454L55.6875 41.4039L59.4741 47.021Z" fill="white"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_dd_11263_111715" x="0.940532" y="0.0738198" width="104.117" height="104.117" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="1.13231"/>
+<feGaussianBlur stdDeviation="4.52925"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.94902 0 0 0 0 0.94902 0 0 0 0 0.94902 0 0 0 0.08 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_11263_111715"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="1.13231"/>
+<feGaussianBlur stdDeviation="4.52925"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.596078 0 0 0 0 0.596078 0 0 0 0 0.596078 0 0 0 0.1 0"/>
+<feBlend mode="normal" in2="effect1_dropShadow_11263_111715" result="effect2_dropShadow_11263_111715"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect2_dropShadow_11263_111715" result="shape"/>
+</filter>
+<radialGradient id="paint0_radial_11263_111715" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(9.99902 98.8383) rotate(-49.3536) scale(75.8665)">
+<stop offset="0.0630482" stop-color="#FFC478"/>
+<stop offset="0.499969" stop-color="#8C7FFF"/>
+<stop offset="1" stop-color="#303030"/>
+</radialGradient>
+<clipPath id="clip0_11263_111715">
+<rect width="34.9375" height="51.9583" fill="white" transform="translate(35.5303 25.0208)"/>
+</clipPath>
+</defs>
+</svg>

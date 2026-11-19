@@ -16,7 +16,7 @@ The logos and names of our customers and partners belong to their respective own
 
 ## Code: MIT
 
-The code written for this site (Hugo templates in `layouts/`, `hugo.toml`, the scripts in `tools/`, `static/assets/js/site.js`, `static/assets/js/pages/`, `static/assets/css/site.css` and the workflow in `.github/`) is released under the MIT License:
+The code written for this site (Hugo templates in `layouts/`, `hugo.toml`, `static/assets/js/site.js`, `static/assets/js/pages/`, `static/assets/css/site.css` and the workflow in `.github/`) is released under the MIT License:
 
 > Copyright (c) 2026 Code-Troopers
 >

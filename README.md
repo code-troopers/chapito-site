@@ -19,7 +19,7 @@ In `hugo server`, pages are served with their extension (`/solutions.html`); onc
 | `layouts/_default/baseof.html` | Shared `<head>` and page skeleton |
 | `layouts/partials/` | Menu, footer and other shared fragments |
 | `static/assets/` | Images, styles, scripts, fonts, video |
-| `hugo.toml` | Site settings (`[params]`: booking link, analytics ID, newsletter form) |
+| `hugo.toml` | Site settings (`[params]`: booking link, Matomo site, newsletter form) |
 
 Editing rules for AI assistants are in [`AGENTS.md`](AGENTS.md).
 

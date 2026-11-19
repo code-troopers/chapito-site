@@ -1,2 +1,19 @@
-<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.Params.gaId }}"></script>
-<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', '{{ site.Params.gaId }}');</script>
+{{- with site.Params.matomoSiteId }}
+<!-- Matomo (matomo.chapi.to), sans cookie : mesure d'audience exemptée de consentement (CNIL) -->
+<script>
+  // mesure seulement sur chapi.to et ses sous-domaines (pas les aperçus locaux)
+  if (/(^|\.)chapi\.to$/.test(location.hostname)) {
+  var _paq = window._paq = window._paq || [];
+  _paq.push(['disableCookies']);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function () {
+    var u = '{{ site.Params.matomoUrl }}';
+    _paq.push(['setTrackerUrl', u + 'matomo.php']);
+    _paq.push(['setSiteId', '{{ . }}']);
+    var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+    g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
+  })();
+  }
+</script>
+{{- end }}

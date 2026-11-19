@@ -18,7 +18,9 @@ lastmod = [":fileModTime"]
 [params]
 wfSite = "669562b12cd180ce7d9ce6fc"
 ogImage = "/assets/img/og-chapito.jpg"
-gaId = "G-WSM1VGGERH"
+# Matomo (mesure d'audience sans cookie) ; matomoSiteId vide = pas de mesure
+matomoUrl = "https://matomo.chapi.to/"
+matomoSiteId = "104"
 calDemo = "https://cal.com/nicolasdm/chapito"
 # URL d'action du formulaire Brevo (https://….sibforms.com/serve/…) ; vide = pop-up newsletter masquée
 brevoFormAction = ""

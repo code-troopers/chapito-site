@@ -23,4 +23,4 @@ matomoUrl = "https://matomo.chapi.to/"
 matomoSiteId = "104"
 calDemo = "https://cal.com/nicolasdm/chapito"
 # URL d'action du formulaire Brevo (https://….sibforms.com/serve/…) ; vide = pop-up newsletter masquée
-brevoFormAction = ""
+brevoFormAction = "https://a7241aab.sibforms.com/v2/serve/MUIFALYEqsqZfLyitUYMGsTw0_PacEMFeeZSC_iijMc6DYkW1mi0WOE1UzPVfavkJ_vutW2ovz1tjFvsWsuxdRD1F9JJxORDIkxjeoEhaByZ8rosbGrfA-sy_dPenSUOmglLEpMM1SxuMbug8ewCHvUSn0s16XZXDm4cykh6xkp4i0RfWCleSN0QE6Ky-g3zA2uFR--HZ41S9V-l"

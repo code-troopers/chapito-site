@@ -1,17 +1,63 @@
 {{ if site.Params.brevoFormAction }}
 <script>
-// Inscription newsletter (Brevo) : envoi en arrière-plan, puis message de confirmation
+// Pop-up newsletter (Brevo) : boîte de dialogue accessible et envoi en arrière-plan.
+// Brevo répond {"success":true} ou {"success":false}, en CORS : on peut donc lire la réponse.
 document.addEventListener('DOMContentLoaded', function () {
+  var overlay = document.getElementById('pop-up-wrapper');
+  if (!overlay) return;
+  var dialog = overlay.querySelector('[role=dialog]');
   var form = document.getElementById('newsletter-form');
-  if (!form) return;
-  var box = form.closest('.newsletter-form');
+  var done = overlay.querySelector('.w-form-done');
+  var fail = overlay.querySelector('.w-form-fail');
+  var closeBtn = overlay.querySelector('.pop-up-exit-button');
+  var submit = form.querySelector('[type=submit]');
+  var submitLabel = submit.value;
+  var lastFocus = null;
+
+  function focusables() {
+    return Array.prototype.filter.call(dialog.querySelectorAll('button, a[href], input:not([type=hidden]):not([tabindex="-1"])'), function (el) { return el.offsetParent !== null; });
+  }
+  function onKey(e) {
+    if (e.key === 'Escape') { close(); return; }
+    if (e.key !== 'Tab') return;
+    var f = focusables();
+    if (!f.length) return;
+    if (e.shiftKey && (document.activeElement === f[0] || document.activeElement === dialog)) { e.preventDefault(); f[f.length - 1].focus(); }
+    else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+  }
+  function close() {
+    overlay.style.display = 'none';
+    document.removeEventListener('keydown', onKey);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  overlay.addEventListener('popup:open', function () {
+    lastFocus = document.activeElement;
+    document.addEventListener('keydown', onKey);
+    dialog.focus();
+  });
+  closeBtn.addEventListener('click', close);
+  overlay.querySelector('.pop-up-back').addEventListener('click', close);
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var btn = form.querySelector('[type=submit]');
-    btn.value = 'Ça arrive...';
-    fetch(form.action, { method: 'POST', body: new FormData(form), mode: 'no-cors' })
-      .then(function () { form.style.display = 'none'; box.querySelector('.w-form-done').style.display = 'block'; })
-      .catch(function () { box.querySelector('.w-form-fail').style.display = 'block'; btn.value = "C'est parti !"; });
+    done.style.display = 'none';
+    fail.style.display = 'none';
+    submit.disabled = true;
+    submit.value = 'Envoi…';
+    fetch(form.action + '?isAjax=1', { method: 'POST', body: new FormData(form) })
+      .then(function (r) { return r.ok ? r.json() : { success: false }; })
+      .then(function (data) {
+        if (!data || data.success !== true) throw new Error('refus Brevo');
+        form.style.display = 'none';
+        done.style.display = 'block';
+        closeBtn.focus();
+      })
+      .catch(function () {
+        fail.style.display = 'block';
+        submit.disabled = false;
+        submit.value = submitLabel;
+      });
   });
 });
 </script>

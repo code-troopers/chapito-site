@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (popupElement) {
           popupElement.style.display = "flex";
           Cookies.set('POPUP_NEWSLETTER', true, { expires: 30*6 });
+          popupElement.dispatchEvent(new Event('popup:open'));
       }
       }, 30000);
     }

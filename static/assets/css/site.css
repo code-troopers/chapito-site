@@ -28,3 +28,14 @@ html { scroll-padding-top: 200px; }
   .scrolling-container { animation: none !important; }
   html { scroll-behavior: auto; }
 }
+
+/* Pop-up newsletter : bouton de fermeture (un vrai <button>) et texte d'information sous le champ. */
+.pop-up-exit-button { background: none; border: 0; padding: 4px; line-height: 0; }
+.pop-up-exit-button:hover, .pop-up-exit-button:focus-visible { opacity: 1; }
+.pop-up-exit-button:focus-visible, .pop-up-box:focus-visible { outline: 2px solid #0a6ebd; outline-offset: 2px; }
+.pop-up-box:focus:not(:focus-visible) { outline: none; }
+.newsletter-info { margin: 12px 0 0; font-size: 13px; line-height: 1.4; color: #595959; }
+.newsletter-info a { color: inherit; text-decoration: underline; }
+/* Webflow place la pop-up (z-index 300) sous le menu et le bandeau (999) : sur mobile ils masquaient le bouton Fermer. */
+.popup-overlay { z-index: 1500; }
+.pop-up-box { max-height: calc(100vh - 40px); max-height: calc(100dvh - 40px); overflow-y: auto; }

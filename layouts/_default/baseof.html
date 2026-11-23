@@ -1,5 +1,6 @@
 {{- $path := partial "path.html" . -}}
 {{- $utility := eq .Kind "404" -}}
+{{- $noindex := or $utility .Params.noindex -}}
 {{- $title := cond $utility "Page introuvable | Chapitô" .Title -}}
 {{- $description := cond $utility "Page non trouvée. Il semble que vous ayez atteint une page qui n’existe pas. Retournez à l’accueil de Chapitô pour découvrir nos solutions d’applications mobiles dédiées aux événements." .Params.description -}}
 {{- $ogTitle := .Params.ogTitle | default $title -}}
@@ -23,7 +24,7 @@
 <meta content="fr_FR" property="og:locale"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-{{ if $utility }}<meta content="noindex" name="robots"/>{{ else }}<link href="{{ $url }}" rel="canonical"/>{{ end }}
+{{ if $noindex }}<meta content="noindex" name="robots"/>{{ else }}<link href="{{ $url }}" rel="canonical"/>{{ end }}
 <link href="/assets/css/chapito-preprod.webflow.shared.7e68bd506.min.css" rel="stylesheet" type="text/css"/>
 <link href="/assets/css/fonts.css" rel="stylesheet" type="text/css"/>
 <link href="/assets/css/site.css" rel="stylesheet" type="text/css"/>

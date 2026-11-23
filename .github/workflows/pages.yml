@@ -3,6 +3,7 @@ name: Publication GitHub Pages
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -10,9 +11,10 @@ permissions:
   pages: write
   id-token: write
 
+# Pull requests only check that the site builds; publication happens on main.
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.number) || 'pages' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
   HUGO_VERSION: 0.164.0
@@ -29,13 +31,16 @@ jobs:
           sudo mv hugo /usr/local/bin/hugo
           hugo version
       - uses: actions/configure-pages@v5
+        if: github.event_name != 'pull_request'
       - name: Générer le site
         run: hugo --logLevel warn
       - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
         with:
           path: public
 
   deploy:
+    if: github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     environment:

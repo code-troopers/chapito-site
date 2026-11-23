@@ -1,24 +1,190 @@
-# Consignes pour les assistants IA (ChatGPT, Codex…)
+# AGENTS.md
 
-Site vitrine statique de Chapitô (chapi.to), généré par Hugo 0.164 (`hugo` produit `public/`).
+Instructions pour tout agent IA (Codex, ChatGPT, Claude, Copilot, Cursor…) qui travaille sur ce dépôt. À lire en entier avant la première modification.
 
-## Règles
+## 1. Contexte
 
-1. Modifier uniquement `content/` (pages), `layouts/` (structure commune, menu, pied de page), `hugo.toml` (`[params]`) et, pour les images, styles ou scripts, `static/assets/`.
-2. Ne jamais modifier `static/assets/js/webflow.*.js` ni `static/assets/css/chapito-preprod.webflow.shared.*.css` : ce sont les fichiers d'origine de Webflow (menu, animations).
-3. Conserver les attributs `data-w-id`, `data-wf-page` et les classes existantes (`w-nav`, `hover-state`, `heading-style-h2`…) : les animations et le menu mobile en dépendent.
-4. Le menu et le pied de page sont communs à toutes les pages (`layouts/partials/navbar.html` et `footer.html`) : ne pas les recopier dans une page.
-5. Ne pas ajouter `w--current` ni `aria-current` à la main : c'est calculé à la génération.
-6. Une page de `content/` contient un en-tête `---` puis uniquement son contenu HTML (pas de `<html>`, `<head>`, menu ni pied de page). Ne pas ajouter de balise `<script>` ou `<style>` dans le contenu (celles qui y sont déjà viennent des blocs « embed » de Webflow, les laisser en place) : les nouveaux styles vont dans un fichier de `static/assets/css/pages/` déclaré dans `css:`, le JavaScript dans `static/assets/js/pages/` déclaré dans `scripts:`.
-7. Nouvelle page : copier `content/privacy.html`, changer l'en-tête (`title`, `description`) et le contenu. Le nom du fichier donne l'adresse (`content/ma-page.html` → `/ma-page`). L'ajouter au menu et au pied de page si besoin.
-8. Les styles de la page camping sont isolés sous `.camping-page` : tout nouveau sélecteur de cette page doit commencer par `.camping-page`.
-9. Écrire en français, avec les accents et la typographie française (espace insécable avant « ? ! : ; »).
-10. Un seul `<h1>` par page. Pour un titre secondaire qui doit garder l'apparence d'un h1, utiliser `<h2 class="h1-look …">`.
-11. Un élément cliquable qui n'est ni un lien ni un bouton doit avoir `role="button" tabindex="0"` (le clavier est géré par `static/assets/js/site.js`).
-12. Vérifier avec `hugo` qu'il n'y a pas d'erreur avant de proposer la modification.
+- Site vitrine de **Chapitô**, application mobile pour les festivals, événements et campings : https://chapi.to
+- Site statique **Hugo 0.164**, sans autre outil : pas de Node, pas de dépendance. Site entièrement en français.
+- Les pages viennent d'un export Webflow : le HTML est dense (une page tient presque sur une ligne), avec des classes et des attributs dont dépendent le menu mobile et les animations.
+- La personne qui te parle n'est **pas forcément développeuse** (par exemple l'équipe commerciale). Elle ne verra pas si tu casses une page, un gabarit ou une animation. **C'est à toi d'être prudent à sa place.**
+- Relecteurs techniques : l'équipe GitHub `@code-troopers/owners` (les développeurs).
+- **Un commit sur `main` = mise en ligne automatique** en quelques minutes (GitHub Actions publie sur GitHub Pages).
 
-## Contenu
+## 2. Règle d'or : classer la demande avant d'agir
 
-- Aucun prix, chiffre, client ou témoignage inventé : reprendre uniquement ce qui figure déjà sur le site ou ce que l'équipe fournit.
+Avant toute modification, classe la demande dans un des deux niveaux et annonce-le à l'utilisateur.
+
+### Niveau 1 : petite modification de contenu (poussée directement sur `main`)
+
+Uniquement :
+
+- corriger une faute d'orthographe, de grammaire ou de typographie ;
+- modifier un texte **à la demande explicite** de l'utilisateur (une phrase, un titre, un chiffre qu'il fournit) ;
+- remplacer une image par une autre, ou modifier son texte alternatif ;
+- modifier le `title` ou la `description` dans l'en-tête d'une page ;
+- remplacer l'adresse d'un lien **existant** (lien `https://` ou page du site).
+
+Fichiers concernés (et **uniquement** ceux-là) :
+
+- `content/*.html` : seulement le texte entre les balises, l'en-tête `title` / `description`, et pour une image ou un lien les attributs décrits dans les recettes (section 6) ;
+- les fichiers image (`.webp`, `.jpg`, `.png`, `.svg`, `.avif`) de `static/assets/img/`, `static/assets/cms/` et `static/assets/camping/`.
+
+Une modification de niveau 1 touche **une seule page ou un seul sujet**. Plusieurs fautes sur une même page : un seul commit. Une nouvelle section, un nouveau bloc, une refonte de texte sur plusieurs paragraphes : niveau 2.
+
+### Niveau 2 : tout le reste (pull request relue par un développeur)
+
+En particulier :
+
+- tout fichier hors des chemins ci-dessus : gabarits (`layouts/`), menu et pied de page, styles (`static/assets/css/`), scripts (`static/assets/js/`, fichiers `.js` et `.css` de `static/assets/camping/`), configuration (`hugo.toml`, `.github/`), ce fichier `AGENTS.md` ;
+- ajouter, déplacer ou supprimer une balise, une classe, un `id` ou un attribut dans une page (hors recettes de la section 6) ;
+- ajouter une section, un bloc, une carte, une page ; supprimer une page ; changer l'adresse d'une page ;
+- changer la mise en page, les couleurs, les polices ;
+- modifier les champs de l'en-tête autres que `title` et `description` (`css`, `scripts`, `webflow`, `wfPage`, `schema`, `aliases`…) ;
+- intégrer une vidéo, un formulaire, un widget ou tout élément externe (`<iframe>`, `<script>`, `<style>`, attributs `onclick`…) ;
+- modifier le lien de prise de démonstration ou le formulaire newsletter (`hugo.toml`) ;
+- une demande de contenu qui t'oblige à toucher un fichier du niveau 2.
+
+**En cas de doute, c'est du niveau 2.**
+
+### Toujours interdit
+
+- Pousser sur `main` une modification de niveau 2, faire un `git push --force`, réécrire l'historique publié.
+- Merger une pull request de niveau 2 : seul un développeur de `@code-troopers/owners` le fait, après relecture.
+- Ajouter un script tiers, un traceur, une police externe, un iframe ou un CDN.
+- Inventer des faits : chiffres, clients, témoignages, tarifs, dates. Tout ce qui est affirmé sur le site doit venir de l'utilisateur ou du contenu existant.
+- Supprimer ou réécrire du contenu existant qui n'est pas visé par la demande.
+- Committer des secrets, le dossier `public/` (généré) ou des fichiers personnels.
+- Contourner un garde-fou (désactiver la CI, modifier `.github/CODEOWNERS`, ignorer une erreur de build).
+
+## 3. Lancer le site en local
+
+Installer Git et [Hugo 0.164](https://github.com/gohugoio/hugo/releases/tag/v0.164.0) (un seul fichier à télécharger, rien d'autre). Sur macOS : `brew install hugo` convient si `hugo version` affiche 0.164 ou plus.
+
+```bash
+hugo server   # aperçu sur http://localhost:1313/ avec rechargement automatique (Ctrl+C pour arrêter)
+hugo          # générer le site dans public/, comme la mise en ligne
+```
+
+En local, les pages s'ouvrent avec leur extension (`http://localhost:1313/pricing.html`) ; en ligne, `/pricing` fonctionne aussi.
+
+## 4. Workflow Git et publication
+
+### Niveau 1 : directement sur `main`
+
+1. Partir de `main` à jour : `git switch main && git pull`.
+2. Faire la modification, et rien d'autre.
+3. Lancer `hugo` : aucune erreur ni avertissement ne doit apparaître. En cas d'erreur, annuler la modification et expliquer le problème.
+4. Vérifier la page touchée avec `hugo server`, en largeur ordinateur **et** mobile.
+5. Montrer à l'utilisateur la modification (le texte avant et après) et attendre son accord.
+6. Committer avec un message en anglais au format Conventional Commits, sans mention d'IA ni trailer `Co-Authored-By` :
+   - `fix(content): fix typo on pricing page`
+   - `chore(content): replace Semaine du Golfe logo`
+7. `git push origin main`. Si le push est refusé parce que `main` a avancé : `git pull --rebase`, relancer `hugo`, puis pousser à nouveau. Jamais de `--force`.
+8. La mise en ligne prend quelques minutes (`gh run watch` pour la suivre). Vérifier ensuite la page sur https://chapi.to.
+
+### Niveau 2 : branche et pull request
+
+1. Partir de `main` à jour, créer une branche courte et explicite : `content/nouvelle-section-camping`, `fix/…`, `feat/…`.
+2. Faire la modification, lancer `hugo` (aucune erreur), vérifier les pages touchées avec `hugo server` (ordinateur et mobile).
+3. Committer (même format de message), pousser et ouvrir la PR. Le dépôt est public : **titre et description en anglais**, sans mention d'IA. La description dit ce qui change sur le site et pourquoi :
+   ```bash
+   git push -u origin HEAD
+   gh pr create --base main --title "<commit message>" --body "<what changes on the site and why>"
+   ```
+   Sans `gh`, donner à l'utilisateur le lien que `git push` affiche.
+4. **Ne pas merger.** GitHub demande la relecture à `@code-troopers/owners` (fichier `.github/CODEOWNERS`). La CI vérifie que le site se génère (`gh pr checks`).
+5. Expliquer à l'utilisateur, en termes simples, ce qui a été modifié et pourquoi une relecture est nécessaire.
+
+Une PR = un sujet. Les développeurs de `@code-troopers/owners` peuvent, eux, pousser ou merger leurs propres branches directement sur `main`.
+
+## 5. Où modifier quoi
+
+| Élément du site | Fichier | Niveau |
+| --- | --- | --- |
+| Accueil (`/`) | `content/_index.html` | 1 pour le texte et les images |
+| La solution (`/solutions`) | `content/solutions.html` | 1 pour le texte et les images |
+| Réalisations (`/realisations`) | `content/realisations.html` | 1 pour le texte et les images, 2 pour ajouter ou retirer une carte |
+| Partenaires (`/partners`) et pages partenaires | `content/partners.html`, `content/partenaire-*.html`, `content/yurplan.html`, `content/wilout.html` | 1 pour le texte et les images |
+| Tarifs (`/pricing`) | `content/pricing.html` | 1 pour le texte (prix fournis par l'utilisateur) |
+| Campings (`/camping`) | `content/camping.html` | 1 pour le texte et les images |
+| Politique de confidentialité (`/privacy`) | `content/privacy.html` | 1 |
+| Menu, bandeau du haut | `layouts/partials/navbar.html` | 2 |
+| Pied de page (adresse, téléphone, réseaux) | `layouts/partials/footer.html` | 2 |
+| Pop-up newsletter | `layouts/partials/newsletter-popup.html` | 2 |
+| Lien de prise de démonstration, Matomo, formulaire newsletter | `hugo.toml` (`[params]`) | 2 |
+| Styles | `static/assets/css/` | 2 |
+
+Pour trouver le fichier qui contient un texte : `grep -rln "texte exact" content layouts`.
+
+## 6. Recettes (niveau 1)
+
+### Corriger une faute ou modifier un texte
+
+- Trouver le texte : `grep -rn "texte exact" content`. S'il n'est que dans `layouts/`, c'est du niveau 2.
+- Ne modifier que les mots visés, entre les balises. Ne pas reformuler le reste de la phrase ni du paragraphe.
+- Ne toucher à aucune balise ni attribut autour. Les `<br/>` et les caractères invisibles (`‍`) déjà présents restent en place.
+
+### Remplacer une image
+
+1. Déposer la nouvelle image dans le même dossier que l'ancienne (`static/assets/img/` ou `static/assets/cms/`), avec un nom en minuscules, chiffres et tirets.
+2. Dans la balise `<img>` concernée, et seulement celle-là :
+   - remplacer la valeur de `src` par `/assets/<dossier>/<nouveau-nom>` ;
+   - si la balise a des attributs `srcset` et `sizes`, les supprimer (ils listent des versions de l'ancienne image) ;
+   - mettre à jour `width` et `height` s'ils sont présents, avec les dimensions de la nouvelle image (ou les proportions de l'ancienne si l'image est redimensionnée par le style) ;
+   - écrire un `alt` qui décrit l'image (le nom du festival ou du partenaire pour un logo). `alt=""` seulement pour une image purement décorative.
+3. Ne pas supprimer l'ancienne image : un développeur fera le ménage.
+
+### Remplacer l'adresse d'un lien existant
+
+- Ne modifier que la valeur de `href`. Adresse en `https://` pour un site externe, ou chemin du site sans extension (`/pricing`, `/camping`).
+- Ne pas ajouter de lien là où il n'y en a pas : c'est du niveau 2.
+
+## 7. Règles éditoriales
+
+- Français, ton direct et concret, sans jargon marketing creux.
+- Typographie française : espace insécable (`&nbsp;` ou U+00A0) avant `:` `;` `!` `?`.
+- Éviter les tics d'écriture d'IA : pas de tiret cadratin (—), pas de formules creuses.
+- Aucun prix, chiffre, client ou témoignage inventé : reprendre uniquement ce qui figure déjà sur le site ou ce que l'utilisateur fournit.
 - « Camping Les Pins Dorés » est un camping fictif de démonstration, pas un client.
 - Le seul appel à l'action est la prise de démonstration (lien cal.com dans `hugo.toml`).
+
+## 8. Images
+
+- Formats : `.webp` de préférence, `.jpg` pour les photos, `.png` pour les captures, `.svg` pour les logos. Pas de `.heic`, pas de `.tiff`.
+- Poids : **moins de 500 Ko** par image, largeur adaptée à l'affichage (inutile de dépasser 2 fois la largeur affichée). Compresser avant d'ajouter.
+- Un `.svg` ne doit contenir ni `<script>` ni lien vers une ressource externe.
+- Ne jamais supprimer une image existante sans vérifier qu'elle n'est plus utilisée : `grep -rn "nom-du-fichier" content layouts static`.
+
+## 9. Pour les tâches techniques (niveau 2)
+
+À lire seulement si l'utilisateur demande une modification technique ; elle sera relue.
+
+1. Ne jamais modifier `static/assets/js/webflow.*.js` ni `static/assets/css/chapito-preprod.webflow.shared.*.css` : ce sont les fichiers d'origine de Webflow (menu, animations).
+2. Conserver les attributs `data-w-id`, `data-wf-page` et les classes existantes (`w-nav`, `hover-state`, `heading-style-h2`…) : les animations et le menu mobile en dépendent.
+3. Le menu et le pied de page sont communs à toutes les pages (`layouts/partials/navbar.html` et `footer.html`) : ne pas les recopier dans une page.
+4. Ne pas ajouter `w--current` ni `aria-current` à la main : c'est calculé à la génération.
+5. Une page de `content/` contient un en-tête `---` puis uniquement son contenu HTML (pas de `<html>`, `<head>`, menu ni pied de page). Ne pas ajouter de balise `<script>` ou `<style>` dans le contenu (celles qui y sont déjà viennent des blocs « embed » de Webflow, les laisser en place) : les nouveaux styles vont dans un fichier de `static/assets/css/pages/` déclaré dans `css:`, le JavaScript dans `static/assets/js/pages/` déclaré dans `scripts:`.
+6. Nouvelle page : copier `content/privacy.html`, changer l'en-tête (`title`, `description`) et le contenu. Le nom du fichier donne l'adresse (`content/ma-page.html` → `/ma-page`). L'ajouter au menu et au pied de page si besoin. `noindex: true` dans l'en-tête l'exclut des moteurs de recherche et du plan du site.
+7. Les styles de la page camping sont isolés sous `.camping-page` : tout nouveau sélecteur de cette page doit commencer par `.camping-page`.
+8. Un seul `<h1>` par page. Pour un titre secondaire qui doit garder l'apparence d'un h1, utiliser `<h2 class="h1-look …">`.
+9. Un élément cliquable qui n'est ni un lien ni un bouton doit avoir `role="button" tabindex="0"` (le clavier est géré par `static/assets/js/site.js`).
+10. Aucune nouvelle dépendance ni outil de build sans accord explicite d'un membre de `@code-troopers/owners`.
+11. Une modification technique ne doit pas changer le rendu des pages non concernées. Comparer `public/` avant et après quand c'est possible.
+
+## 10. Garde-fous en place
+
+- **CI** (`.github/workflows/pages.yml`) : sur chaque pull request, vérifie que le site se génère ; sur `main`, génère et publie.
+- **CODEOWNERS** (`.github/CODEOWNERS`) : toute pull request demande automatiquement la relecture de `@code-troopers/owners`.
+- **Historique** : chaque poussée sur `main` reste visible et annulable par un développeur (`git revert`).
+
+## 11. Comment rendre compte à l'utilisateur
+
+À la fin de chaque tâche, en français simple :
+
+1. ce qui a été modifié (pages du site, pas noms de fichiers techniques) ;
+2. le niveau (petite modification ou relecture nécessaire) ;
+3. pour le niveau 1 : la confirmation que c'est en ligne, avec le lien de la page ; pour le niveau 2 : le lien de la pull request ;
+4. ce qui reste à faire de son côté (vérifier la page en ligne, attendre la relecture).
+
+Si une vérification échoue et que tu ne sais pas la corriger sans toucher au niveau 2, arrête-toi et explique le problème au lieu de contourner.

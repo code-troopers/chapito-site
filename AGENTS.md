@@ -6,7 +6,7 @@ Instructions pour tout agent IA (Codex, ChatGPT, Claude, Copilot, Cursor…) qui
 
 - Site vitrine de **Chapitô**, application mobile pour les festivals, événements et campings : https://chapi.to
 - Site statique **Hugo 0.164**, sans autre outil : pas de Node, pas de dépendance. Site entièrement en français.
-- Les pages viennent d'un export Webflow : le HTML est dense (une page tient presque sur une ligne), avec des classes et des attributs dont dépendent le menu mobile et les animations.
+- Les pages viennent d'un export Webflow, indenté depuis : beaucoup de classes et d'attributs dont dépendent le menu mobile et les animations.
 - La personne qui te parle n'est **pas forcément développeuse** (par exemple l'équipe commerciale). Elle ne verra pas si tu casses une page, un gabarit ou une animation. **C'est à toi d'être prudent à sa place.**
 - Relecteurs techniques : l'équipe GitHub `@code-troopers/owners` (les développeurs).
 - **Un commit sur `main` = mise en ligne automatique** en quelques minutes (GitHub Actions publie sur GitHub Pages).
@@ -124,6 +124,7 @@ Pour trouver le fichier qui contient un texte : `grep -rln "texte exact" content
 - Trouver le texte : `grep -rn "texte exact" content`. S'il n'est que dans `layouts/`, c'est du niveau 2.
 - Ne modifier que les mots visés, entre les balises. Ne pas reformuler le reste de la phrase ni du paragraphe.
 - Ne toucher à aucune balise ni attribut autour. Les `<br/>` et les caractères invisibles (`‍`) déjà présents restent en place.
+- Ne pas réindenter ni reformater le fichier. Ne jamais ajouter d'espace ou de retour à la ligne entre deux balises qui sont collées (par exemple deux `<img>` ou deux liens côte à côte) : cela ajouterait un espace visible sur la page.
 
 ### Remplacer une image
 

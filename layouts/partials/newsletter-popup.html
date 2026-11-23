@@ -1,1 +1,29 @@
-{{ with site.Params.brevoFormAction }}<div class="popup-overlay" id="pop-up-wrapper"><div class="pop-up-back" data-w-id="42fdf8a9-d6c6-a8a2-c3cf-44b11307e4e7"></div><div class="pop-up-box" role="dialog" aria-modal="true" aria-labelledby="newsletter-titre" tabindex="-1"><button type="button" class="pop-up-exit-button" data-w-id="42fdf8a9-d6c6-a8a2-c3cf-44b11307e4e9" aria-label="Fermer"><img alt="" src="/assets/img/677ffef2ab1654146949f582_Exit-Icon.svg" width="18" height="18"/></button><div class="pop-up-text-box"><h2 class="pop-up-header" id="newsletter-titre">Hop hop hop&nbsp;!</h2><p class="pop-up-paragraph">Chapitô vous intéresse&nbsp;? <br/><br/>Inscrivez-vous à notre newsletter.<br/>‍<br/>Notre <strong>promesse</strong>&nbsp;: <br/>‍<br/>• Très <strong>ponctuelle</strong><br/>• Pas de SPAM, vous recevez <strong>uniquement</strong> si vous avez <strong>choisi</strong> de vous inscrire<br/>• Informations <strong>utiles</strong><br/>• Nos grosses <strong>nouveautés</strong><br/>• <strong>Adaptative</strong>, à l'écoute de <strong>vos retours</strong></p></div><div class="form-2 newsletter-form"><form class="pop-up-form" id="newsletter-form" action="{{ . }}" method="POST"><label class="sr-only" for="EMAIL">Adresse e-mail</label><input class="pop-up-text-input w-input" id="EMAIL" maxlength="256" name="EMAIL" placeholder="Quel est votre e-mail&nbsp;?" required="" type="email" autocomplete="email" aria-describedby="newsletter-info"/><input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true"/><input type="hidden" name="locale" value="fr"/><input class="button w-button" type="submit" value="C'est parti !"/><p class="newsletter-info" id="newsletter-info">Désinscription possible à tout moment grâce au lien présent dans chaque newsletter. Votre adresse est utilisée uniquement pour cet envoi, via notre prestataire Brevo. <a href="/privacy">Politique de confidentialité</a></p></form><div aria-live="polite"><div class="pop-up-form-success w-form-done"><div>Bien reçu&nbsp;!<br/>Vous recevrez votre première newsletter lors de la prochaine annonce <strong>intéressante</strong>.</div></div><div class="popup-form-error w-form-fail"><div>Oups, l'inscription n'a pas fonctionné. Vérifiez votre adresse puis réessayez.</div></div></div></div></div></div>{{ end }}
+{{ with site.Params.brevoFormAction }}
+<div class="popup-overlay" id="pop-up-wrapper">
+  <div class="pop-up-back" data-w-id="42fdf8a9-d6c6-a8a2-c3cf-44b11307e4e7">
+  </div>
+  <div class="pop-up-box" role="dialog" aria-modal="true" aria-labelledby="newsletter-titre" tabindex="-1">
+    <button type="button" class="pop-up-exit-button" data-w-id="42fdf8a9-d6c6-a8a2-c3cf-44b11307e4e9" aria-label="Fermer"><img alt="" src="/assets/img/677ffef2ab1654146949f582_Exit-Icon.svg" width="18" height="18"/></button>
+    <div class="pop-up-text-box">
+      <h2 class="pop-up-header" id="newsletter-titre">Hop hop hop&nbsp;!</h2>
+      <p class="pop-up-paragraph">Chapitô vous intéresse&nbsp;? <br/><br/>Inscrivez-vous à notre newsletter.<br/>‍<br/>Notre <strong>promesse</strong>&nbsp;: <br/>‍<br/>• Très <strong>ponctuelle</strong><br/>• Pas de SPAM, vous recevez <strong>uniquement</strong> si vous avez <strong>choisi</strong> de vous inscrire<br/>• Informations <strong>utiles</strong><br/>• Nos grosses <strong>nouveautés</strong><br/>• <strong>Adaptative</strong>, à l'écoute de <strong>vos retours</strong>
+      </p>
+    </div>
+    <div class="form-2 newsletter-form">
+      <form class="pop-up-form" id="newsletter-form" action="{{ . }}" method="POST">
+        <label class="sr-only" for="EMAIL">Adresse e-mail</label><input class="pop-up-text-input w-input" id="EMAIL" maxlength="256" name="EMAIL" placeholder="Quel est votre e-mail&nbsp;?" required="" type="email" autocomplete="email" aria-describedby="newsletter-info"/><input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true"/><input type="hidden" name="locale" value="fr"/><input class="button w-button" type="submit" value="C'est parti !"/>
+        <p class="newsletter-info" id="newsletter-info">Désinscription possible à tout moment grâce au lien présent dans chaque newsletter. Votre adresse est utilisée uniquement pour cet envoi, via notre prestataire Brevo. <a href="/privacy">Politique de confidentialité</a>
+        </p>
+      </form>
+      <div aria-live="polite">
+        <div class="pop-up-form-success w-form-done">
+          <div>Bien reçu&nbsp;!<br/>Vous recevrez votre première newsletter lors de la prochaine annonce <strong>intéressante</strong>.</div>
+        </div>
+        <div class="popup-form-error w-form-fail">
+          <div>Oups, l'inscription n'a pas fonctionné. Vérifiez votre adresse puis réessayez.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

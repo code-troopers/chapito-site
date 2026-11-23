@@ -75,8 +75,8 @@ En local, les pages s'ouvrent avec leur extension (`http://localhost:1313/pricin
 1. Partir de `main` à jour : `git switch main && git pull`.
 2. Faire la modification, et rien d'autre.
 3. Lancer `hugo` : aucune erreur ni avertissement ne doit apparaître. En cas d'erreur, annuler la modification et expliquer le problème.
-4. Vérifier la page touchée avec `hugo server`, en largeur ordinateur **et** mobile.
-5. Montrer à l'utilisateur la modification (le texte avant et après) et attendre son accord.
+4. Montrer à l'utilisateur la modification (le texte ou l'image avant et après).
+5. **Faire valider en local par l'utilisateur** (voir ci-dessous), avant tout commit. Au niveau 1, c'est la seule vérification avant la mise en ligne.
 6. Committer avec un message en anglais au format Conventional Commits, sans mention d'IA ni trailer `Co-Authored-By` :
    - `fix(content): fix typo on pricing page`
    - `chore(content): replace Semaine du Golfe logo`
@@ -86,15 +86,26 @@ En local, les pages s'ouvrent avec leur extension (`http://localhost:1313/pricin
 ### Niveau 2 : branche et pull request
 
 1. Partir de `main` à jour, créer une branche courte et explicite : `content/nouvelle-section-camping`, `fix/…`, `feat/…`.
-2. Faire la modification, lancer `hugo` (aucune erreur), vérifier les pages touchées avec `hugo server` (ordinateur et mobile).
-3. Committer (même format de message), pousser et ouvrir la PR. Le dépôt est public : **titre et description en anglais**, sans mention d'IA. La description dit ce qui change sur le site et pourquoi :
+2. Faire la modification, lancer `hugo` (aucune erreur).
+3. **Faire valider en local par l'utilisateur** (voir ci-dessous), avant tout commit.
+4. Committer (même format de message), pousser et ouvrir la PR. Le dépôt est public : **titre et description en anglais**, sans mention d'IA. La description dit ce qui change sur le site et pourquoi :
    ```bash
    git push -u origin HEAD
    gh pr create --base main --title "<commit message>" --body "<what changes on the site and why>"
    ```
    Sans `gh`, donner à l'utilisateur le lien que `git push` affiche.
-4. **Ne pas merger.** GitHub demande la relecture à `@code-troopers/owners` (fichier `.github/CODEOWNERS`). La CI vérifie que le site se génère (`gh pr checks`).
-5. Expliquer à l'utilisateur, en termes simples, ce qui a été modifié et pourquoi une relecture est nécessaire.
+5. **Ne pas merger.** GitHub demande la relecture à `@code-troopers/owners` (fichier `.github/CODEOWNERS`). La CI vérifie que le site se génère (`gh pr checks`).
+6. Expliquer à l'utilisateur, en termes simples, ce qui a été modifié et pourquoi une relecture est nécessaire.
+
+### Faire valider en local par l'utilisateur
+
+C'est toi qui modifies, mais c'est l'utilisateur qui regarde : tu ne vois pas réellement la page.
+
+- Lancer `hugo server` en arrière-plan : le serveur tourne en continu, ne pas attendre qu'il se termine. Si l'outil ne permet pas de laisser tourner une commande, demander à l'utilisateur de lancer `hugo server` dans un terminal, depuis le dossier du dépôt.
+- Donner l'adresse exacte de chaque page modifiée, avec l'extension `.html` (par exemple http://localhost:1313/pricing.html, ou http://localhost:1313/ pour l'accueil) et dire où regarder sur la page.
+- Demander de la vérifier sur ordinateur **et** en largeur mobile (fenêtre étroite, ou mode « appareil » des outils de développement du navigateur).
+- Attendre l'accord explicite de l'utilisateur avant de committer. S'il demande une retouche, la faire et lui redemander de vérifier.
+- Arrêter le serveur une fois la modification validée.
 
 Une PR = un sujet. Les développeurs de `@code-troopers/owners` peuvent, eux, pousser ou merger leurs propres branches directement sur `main`.
 

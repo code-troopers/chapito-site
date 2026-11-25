@@ -8,7 +8,7 @@ Instructions pour tout agent IA (Codex, ChatGPT, Claude, Copilot, Cursor…) qui
 - Site statique **Hugo 0.164**, sans autre outil : pas de Node, pas de dépendance. Site entièrement en français.
 - Les pages viennent d'un export Webflow, indenté depuis : beaucoup de classes et d'attributs dont dépendent le menu mobile et les animations.
 - La personne qui te parle n'est **pas forcément développeuse** (par exemple l'équipe commerciale). Elle ne verra pas si tu casses une page, un gabarit ou une animation. **C'est à toi d'être prudent à sa place.**
-- Relecteurs techniques : l'équipe GitHub `@code-troopers/owners` (les développeurs).
+- Relecteurs techniques : l'équipe GitHub `@code-troopers/developpeurs` (les développeurs).
 - **Un merge dans `main` = mise en ligne automatique** en quelques minutes (GitHub Actions publie sur GitHub Pages). Toute modification passe par une pull request (PR) : GitHub refuse les envois directs sur `main`, sauf aux développeurs.
 
 ### Parler à l'utilisateur
@@ -57,8 +57,8 @@ En particulier :
 
 ### Toujours interdit
 
-- Pousser directement sur `main` (sauf demande explicite d'un développeur de `@code-troopers/owners`, qui peut contourner la règle), faire un `git push --force`, réécrire l'historique publié.
-- Merger une PR de niveau 2, ou dire à l'utilisateur de le faire : seul un développeur de `@code-troopers/owners` la publie, après relecture.
+- Pousser directement sur `main` (sauf demande explicite d'un développeur de `@code-troopers/developpeurs`, qui peut contourner la règle), faire un `git push --force`, réécrire l'historique publié.
+- Merger une PR de niveau 2, ou dire à l'utilisateur de le faire : seul un développeur de `@code-troopers/developpeurs` la publie, après relecture.
 - Ajouter un script tiers, un traceur, une police externe, un iframe ou un CDN.
 - Inventer des faits : chiffres, clients, témoignages, tarifs, dates. Tout ce qui est affirmé sur le site doit venir de l'utilisateur ou du contenu existant.
 - Supprimer ou réécrire du contenu existant qui n'est pas visé par la demande.
@@ -181,13 +181,13 @@ Pour trouver le fichier qui contient un texte : `grep -rln "texte exact" content
 7. Les styles de la page camping sont isolés sous `.camping-page` : tout nouveau sélecteur de cette page doit commencer par `.camping-page`.
 8. Un seul `<h1>` par page. Pour un titre secondaire qui doit garder l'apparence d'un h1, utiliser `<h2 class="h1-look …">`.
 9. Un élément cliquable qui n'est ni un lien ni un bouton doit avoir `role="button" tabindex="0"` (le clavier est géré par `static/assets/js/site.js`).
-10. Aucune nouvelle dépendance ni outil de build sans accord explicite d'un membre de `@code-troopers/owners`.
+10. Aucune nouvelle dépendance ni outil de build sans accord explicite d'un membre de `@code-troopers/developpeurs`.
 11. Une modification technique ne doit pas changer le rendu des pages non concernées. Comparer `public/` avant et après quand c'est possible.
 
 ## 10. Garde-fous en place
 
-- **Règle « Protect main »** sur GitHub : PR obligatoire, CI verte obligatoire, pas de `push --force` ni de suppression de `main`. Seuls les développeurs de `@code-troopers/owners` peuvent la contourner.
-- **CODEOWNERS** (`.github/CODEOWNERS`) : une PR qui touche autre chose que les pages (`content/`) et les images exige l'approbation d'un développeur de `@code-troopers/owners`. GitHub ne voit pas la différence entre une faute corrigée et une nouvelle section dans une page : le classement de la section 2 reste ta responsabilité.
+- **Règle « Protect main »** sur GitHub : PR obligatoire, CI verte obligatoire, pas de `push --force` ni de suppression de `main`. Seuls les développeurs de `@code-troopers/developpeurs` peuvent la contourner.
+- **CODEOWNERS** (`.github/CODEOWNERS`) : une PR qui touche autre chose que les pages (`content/`) et les images exige l'approbation d'un développeur de `@code-troopers/developpeurs`. GitHub ne voit pas la différence entre une faute corrigée et une nouvelle section dans une page : le classement de la section 2 reste ta responsabilité.
 - **CI** (`.github/workflows/pages.yml`) : sur chaque PR, vérifie que le site se génère ; sur `main`, génère et publie.
 - **Preview Netlify** sur chaque PR, pour relire le rendu avant publication (`netlify.toml`). La publication reste faite par GitHub Pages.
 

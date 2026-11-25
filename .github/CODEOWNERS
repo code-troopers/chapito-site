@@ -2,7 +2,7 @@
 # a pull request needs an approval from the owners of every file it touches.
 
 # Default: templates, styles, scripts, configuration, CI and agent instructions
-*                                    @code-troopers/owners
+*                                    @code-troopers/developpeurs
 
 # Editorial content: no owner, the author can merge once CI is green (see AGENTS.md)
 /content/

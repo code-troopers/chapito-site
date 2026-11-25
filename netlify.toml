@@ -1,0 +1,15 @@
+# Netlify only builds previews of pull requests; chapi.to itself is published by GitHub Pages
+# (.github/workflows/pages.yml).
+
+[build]
+  command = "hugo --logLevel warn --baseURL \"${DEPLOY_PRIME_URL}/\""
+  publish = "public"
+
+[build.environment]
+  HUGO_VERSION = "0.164.0"
+
+# Keep every Netlify copy of the site out of search engines.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"

@@ -1,3 +1,15 @@
-# Every pull request automatically requests a review from the developers.
-# Small content fixes (typos, image swaps) are pushed straight to main; see AGENTS.md.
-*    @code-troopers/owners
+# With "Require review from Code Owners" enabled on main (ruleset "Protect main"),
+# a pull request needs an approval from the owners of every file it touches.
+
+# Default: templates, styles, scripts, configuration, CI and agent instructions
+*                                    @code-troopers/owners
+
+# Editorial content: no owner, the author can merge once CI is green (see AGENTS.md)
+/content/
+/static/assets/img/
+/static/assets/cms/
+/static/assets/camping/**/*.webp
+/static/assets/camping/**/*.jpg
+/static/assets/camping/**/*.png
+/static/assets/camping/**/*.svg
+/static/assets/camping/**/*.avif

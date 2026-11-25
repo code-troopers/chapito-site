@@ -9,13 +9,21 @@ Instructions pour tout agent IA (Codex, ChatGPT, Claude, Copilot, Cursor…) qui
 - Les pages viennent d'un export Webflow, indenté depuis : beaucoup de classes et d'attributs dont dépendent le menu mobile et les animations.
 - La personne qui te parle n'est **pas forcément développeuse** (par exemple l'équipe commerciale). Elle ne verra pas si tu casses une page, un gabarit ou une animation. **C'est à toi d'être prudent à sa place.**
 - Relecteurs techniques : l'équipe GitHub `@code-troopers/owners` (les développeurs).
-- **Un commit sur `main` = mise en ligne automatique** en quelques minutes (GitHub Actions publie sur GitHub Pages).
+- **Un merge dans `main` = mise en ligne automatique** en quelques minutes (GitHub Actions publie sur GitHub Pages). Toute modification passe par une pull request (PR) : GitHub refuse les envois directs sur `main`, sauf aux développeurs.
+
+### Parler à l'utilisateur
+
+- Mots simples. Pas de jargon (branche, commit, PR, CI, merge, en-tête…) sans l'expliquer en quelques mots : une PR est une « demande de mise en ligne », merger veut dire « publier ».
+- Ne pose une question que si la réponse change ce que tu vas faire. Une demande précise (« remplace X par Y ») s'exécute sans redemander confirmation.
+- Une question à la fois, à laquelle on répond par oui, non ou un choix simple, avec ta recommandation.
+- Ne lui demande jamais de choisir un nom de branche, un message de commit ou le niveau de la demande : c'est ton travail.
+- Garde pour toi les détails techniques qui ne demandent aucune décision de sa part (commandes lancées, structure des fichiers). S'il y a un vrai doute sur le contenu (texte présent à plusieurs endroits, formulation ambiguë), pose-le en citant la page du site concernée, pas le fichier.
 
 ## 2. Règle d'or : classer la demande avant d'agir
 
-Avant toute modification, classe la demande dans un des deux niveaux et annonce-le à l'utilisateur.
+Avant toute modification, classe la demande dans un des deux niveaux et annonce-le à l'utilisateur en une phrase simple : « C'est une petite modification de contenu, tu pourras la publier toi-même » ou « C'est une modification technique, un développeur devra la relire avant publication ».
 
-### Niveau 1 : petite modification de contenu (poussée directement sur `main`)
+### Niveau 1 : petite modification de contenu (publiée par l'utilisateur lui-même)
 
 Uniquement :
 
@@ -30,7 +38,7 @@ Fichiers concernés (et **uniquement** ceux-là) :
 - `content/*.html` : seulement le texte entre les balises, l'en-tête `title` / `description`, et pour une image ou un lien les attributs décrits dans les recettes (section 6) ;
 - les fichiers image (`.webp`, `.jpg`, `.png`, `.svg`, `.avif`) de `static/assets/img/`, `static/assets/cms/` et `static/assets/camping/`.
 
-Une modification de niveau 1 touche **une seule page ou un seul sujet**. Plusieurs fautes sur une même page : un seul commit. Une nouvelle section, un nouveau bloc, une refonte de texte sur plusieurs paragraphes : niveau 2.
+Une modification de niveau 1 touche **une seule page ou un seul sujet**. Plusieurs fautes sur une même page : une seule PR. Une nouvelle section, un nouveau bloc, une refonte de texte sur plusieurs paragraphes : niveau 2.
 
 ### Niveau 2 : tout le reste (pull request relue par un développeur)
 
@@ -49,8 +57,8 @@ En particulier :
 
 ### Toujours interdit
 
-- Pousser sur `main` une modification de niveau 2, faire un `git push --force`, réécrire l'historique publié.
-- Merger une pull request de niveau 2 : seul un développeur de `@code-troopers/owners` le fait, après relecture.
+- Pousser directement sur `main` (sauf demande explicite d'un développeur de `@code-troopers/owners`, qui peut contourner la règle), faire un `git push --force`, réécrire l'historique publié.
+- Merger une PR de niveau 2, ou dire à l'utilisateur de le faire : seul un développeur de `@code-troopers/owners` la publie, après relecture.
 - Ajouter un script tiers, un traceur, une police externe, un iframe ou un CDN.
 - Inventer des faits : chiffres, clients, témoignages, tarifs, dates. Tout ce qui est affirmé sur le site doit venir de l'utilisateur ou du contenu existant.
 - Supprimer ou réécrire du contenu existant qui n'est pas visé par la demande.
@@ -70,44 +78,36 @@ En local, les pages s'ouvrent avec leur extension (`http://localhost:1313/pricin
 
 ## 4. Workflow Git et publication
 
-### Niveau 1 : directement sur `main`
+Toute modification, quel que soit son niveau, passe par une branche et une PR vers `main`.
 
-1. Partir de `main` à jour : `git switch main && git pull`.
-2. Faire la modification, et rien d'autre.
-3. Lancer `hugo` : aucune erreur ni avertissement ne doit apparaître. En cas d'erreur, annuler la modification et expliquer le problème.
-4. Montrer à l'utilisateur la modification (le texte ou l'image avant et après).
-5. **Faire valider en local par l'utilisateur** (voir ci-dessous), avant tout commit. Au niveau 1, c'est la seule vérification avant la mise en ligne.
-6. Committer avec un message en anglais au format Conventional Commits, sans mention d'IA ni trailer `Co-Authored-By` :
+1. Partir de `main` à jour (`git switch main && git pull`), créer une branche courte et explicite : `content/typo-tarifs`, `content/logo-egaluantes`, `fix/…`, `feat/…`.
+2. Faire la modification, et rien d'autre. Lancer `hugo` : aucune erreur ni avertissement ne doit apparaître. En cas d'erreur que tu ne sais pas corriger sans sortir du niveau de la demande, annuler et expliquer le problème.
+3. **Faire vérifier le rendu par l'utilisateur.** Comment dépend de l'endroit où tu tournes :
+   - **Sur l'ordinateur de l'utilisateur** (Codex CLI, application Codex ouverte sur un dossier local, Claude Code…) : faire valider en local, **avant tout commit** :
+     - Lancer `hugo server` en arrière-plan : le serveur tourne en continu, ne pas attendre qu'il se termine. Si l'outil ne permet pas de laisser tourner une commande, demander à l'utilisateur de lancer `hugo server` dans un terminal, depuis le dossier du dépôt.
+     - Donner l'adresse exacte de chaque page modifiée, avec l'extension `.html` (par exemple `http://localhost:1313/pricing.html`, ou `http://localhost:1313/` pour l'accueil), dire où regarder sur la page, et demander de la vérifier sur ordinateur **et** en largeur mobile (fenêtre étroite, ou mode « appareil » des outils de développement du navigateur).
+     - **Attendre l'accord explicite de l'utilisateur avant de committer.** S'il demande une retouche, la faire et lui redemander de vérifier.
+     - Arrêter le serveur une fois la modification validée.
+   - **Dans le cloud** (Codex dans ChatGPT, agent lancé depuis GitHub…) : l'utilisateur ne peut pas ouvrir ton `localhost`, ne lui demande pas de lancer de commande. Committe, ouvre la PR, et la vérification se fait sur la preview Netlify (étape 6), **avant publication**.
+   - Dans le doute, considère que tu es dans le cloud : la preview Netlify montre de toute façon le vrai site.
+4. Committer avec un message **en anglais** (même si la conversation est en français) au format Conventional Commits, sans mention d'IA ni trailer `Co-Authored-By` :
    - `fix(content): fix typo on pricing page`
    - `chore(content): replace Semaine du Golfe logo`
-7. `git push origin main`. Si le push est refusé parce que `main` a avancé : `git pull --rebase`, relancer `hugo`, puis pousser à nouveau. Jamais de `--force`.
-8. La mise en ligne prend quelques minutes (`gh run watch` pour la suivre). Vérifier ensuite la page sur https://chapi.to.
-
-### Niveau 2 : branche et pull request
-
-1. Partir de `main` à jour, créer une branche courte et explicite : `content/nouvelle-section-camping`, `fix/…`, `feat/…`.
-2. Faire la modification, lancer `hugo` (aucune erreur).
-3. **Faire valider en local par l'utilisateur** (voir ci-dessous), avant tout commit.
-4. Committer (même format de message), pousser et ouvrir la PR. Le dépôt est public : **titre et description en anglais**, sans mention d'IA. La description dit ce qui change sur le site et pourquoi :
+5. Pousser et ouvrir la PR vers `main`. Le dépôt est public : **titre et description en anglais**, sans mention d'IA. La description dit ce qui change sur le site et pourquoi :
    ```bash
    git push -u origin HEAD
    gh pr create --base main --title "<commit message>" --body "<what changes on the site and why>"
    ```
    Sans `gh`, donner à l'utilisateur le lien que `git push` affiche.
-5. **Ne pas merger.** GitHub demande la relecture à `@code-troopers/owners` (fichier `.github/CODEOWNERS`). La CI vérifie que le site se génère (`gh pr checks`).
-6. Expliquer à l'utilisateur, en termes simples, ce qui a été modifié et pourquoi une relecture est nécessaire.
+6. Attendre les vérifications (`gh pr checks`) :
+   - **CI** (`build`) : le site se génère sans erreur ;
+   - **Netlify** : une preview du site, prête quelques minutes après l'ouverture de la PR (lien `https://deploy-preview-<numéro de la PR>--<site>.netlify.app/`, donné par Netlify dans la PR). **Donne à l'utilisateur l'adresse exacte de chaque page modifiée sur la preview, avec l'extension `.html`** (par exemple `https://deploy-preview-12--<site>.netlify.app/pricing.html`) et demande-lui de la vérifier sur ordinateur et sur téléphone. Attends son accord explicite avant de publier. S'il demande une retouche, la faire sur la même branche : la preview se met à jour.
+7. Publier (merger) :
+   - niveau 1, CI verte, preview validée par l'utilisateur : `gh pr merge --squash --delete-branch`. Si tu ne peux pas merger (pas de `gh`, agent dans le cloud), explique-lui comment faire : ouvrir le lien de la PR, cliquer sur le bouton vert en bas de la page (choisir « Squash and merge » si un menu propose plusieurs options), puis « Confirm squash and merge ». Il n'a besoin de l'accord de personne ;
+   - niveau 2 : ne pas merger. Dis-lui simplement qu'un développeur de l'équipe va relire, et que la modification sera publiée après son approbation.
+8. Après le merge, la mise en ligne prend quelques minutes. Vérifier la page sur https://chapi.to.
 
-### Faire valider en local par l'utilisateur
-
-C'est toi qui modifies, mais c'est l'utilisateur qui regarde : tu ne vois pas réellement la page.
-
-- Lancer `hugo server` en arrière-plan : le serveur tourne en continu, ne pas attendre qu'il se termine. Si l'outil ne permet pas de laisser tourner une commande, demander à l'utilisateur de lancer `hugo server` dans un terminal, depuis le dossier du dépôt.
-- Donner l'adresse exacte de chaque page modifiée, avec l'extension `.html` (par exemple http://localhost:1313/pricing.html, ou http://localhost:1313/ pour l'accueil) et dire où regarder sur la page.
-- Demander de la vérifier sur ordinateur **et** en largeur mobile (fenêtre étroite, ou mode « appareil » des outils de développement du navigateur).
-- Attendre l'accord explicite de l'utilisateur avant de committer. S'il demande une retouche, la faire et lui redemander de vérifier.
-- Arrêter le serveur une fois la modification validée.
-
-Une PR = un sujet. Les développeurs de `@code-troopers/owners` peuvent, eux, pousser ou merger leurs propres branches directement sur `main`.
+Une PR = un sujet. Ne mélange pas une correction de faute et une nouvelle section.
 
 ## 5. Où modifier quoi
 
@@ -186,9 +186,10 @@ Pour trouver le fichier qui contient un texte : `grep -rln "texte exact" content
 
 ## 10. Garde-fous en place
 
-- **CI** (`.github/workflows/pages.yml`) : sur chaque pull request, vérifie que le site se génère ; sur `main`, génère et publie.
-- **CODEOWNERS** (`.github/CODEOWNERS`) : toute pull request demande automatiquement la relecture de `@code-troopers/owners`.
-- **Historique** : chaque poussée sur `main` reste visible et annulable par un développeur (`git revert`).
+- **Règle « Protect main »** sur GitHub : PR obligatoire, CI verte obligatoire, pas de `push --force` ni de suppression de `main`. Seuls les développeurs de `@code-troopers/owners` peuvent la contourner.
+- **CODEOWNERS** (`.github/CODEOWNERS`) : une PR qui touche autre chose que les pages (`content/`) et les images exige l'approbation d'un développeur de `@code-troopers/owners`. GitHub ne voit pas la différence entre une faute corrigée et une nouvelle section dans une page : le classement de la section 2 reste ta responsabilité.
+- **CI** (`.github/workflows/pages.yml`) : sur chaque PR, vérifie que le site se génère ; sur `main`, génère et publie.
+- **Preview Netlify** sur chaque PR, pour relire le rendu avant publication (`netlify.toml`). La publication reste faite par GitHub Pages.
 
 ## 11. Comment rendre compte à l'utilisateur
 
@@ -196,7 +197,7 @@ Pour trouver le fichier qui contient un texte : `grep -rln "texte exact" content
 
 1. ce qui a été modifié (pages du site, pas noms de fichiers techniques) ;
 2. le niveau (petite modification ou relecture nécessaire) ;
-3. pour le niveau 1 : la confirmation que c'est en ligne, avec le lien de la page ; pour le niveau 2 : le lien de la pull request ;
-4. ce qui reste à faire de son côté (vérifier la page en ligne, attendre la relecture).
+3. le lien de la PR et l'adresse de chaque page modifiée sur la preview Netlify (ou, une fois publiée, sur https://chapi.to) ;
+4. ce qui reste à faire de son côté (vérifier la preview, publier, ou attendre la relecture).
 
 Si une vérification échoue et que tu ne sais pas la corriger sans toucher au niveau 2, arrête-toi et explique le problème au lieu de contourner.

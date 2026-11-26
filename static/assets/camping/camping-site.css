@@ -143,3 +143,59 @@
   .camping-page .hero-proof ul { font-size: .85rem; }
 }
 .camping-page .hero-copy h1 { margin-top: 0; }
+
+/* Situations : cartes « problème → réponse » lisibles sans clic (les onglets obligeaient à remonter en mobile). */
+.camping-page .pain-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.camping-page .pain-card { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 160px; gap: 28px; min-height: 360px; padding: 36px 32px 0 36px; overflow: hidden; border-radius: 28px; background: var(--gray-light); }
+.camping-page .pain-copy { padding-bottom: 36px; }
+.camping-page .pain-card h3 { margin-bottom: 14px; font-size: 1.45rem; }
+.camping-page .pain-quote { margin-bottom: 22px; color: #3f4a4f; font-size: .95rem; font-style: italic; }
+.camping-page .pain-fix { margin: 0; padding-top: 18px; border-top: 1px solid rgba(11, 11, 13, .14); font-size: .95rem; }
+.camping-page .pain-fix b { display: block; margin-bottom: 4px; color: var(--blue-deep); font-weight: 600; }
+.camping-page .pain-phone { position: relative; align-self: end; width: 160px; margin-bottom: -110px; }
+@media (max-width: 991px) { .camping-page .pain-grid { grid-template-columns: 1fr; } }
+@media (max-width: 620px) {
+  .camping-page .pain-card { grid-template-columns: 1fr; gap: 0; min-height: 0; padding: 28px 24px 0; }
+  .camping-page .pain-copy { padding-bottom: 24px; }
+  .camping-page .pain-card h3 { font-size: 1.3rem; }
+  .camping-page .pain-phone { justify-self: center; width: 150px; height: 150px; margin-bottom: 0; border-bottom: 0; border-radius: 30px 30px 0 0; }
+  .camping-page .pain-phone img { height: auto; }
+}
+
+/* Ce que Chapitô rapporte. */
+.camping-page .gains { background: #fff4df; }
+.camping-page .gains .section-heading { margin-bottom: 56px; }
+.camping-page .gains-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.camping-page .gains-grid article { padding: 34px; border-radius: 24px; background: #fff; box-shadow: 0 18px 50px rgba(80, 55, 10, .07); }
+.camping-page .gains-grid h3 { margin-bottom: 14px; font-size: 1.4rem; }
+.camping-page .gains-grid p { margin: 0; color: #3f4a4f; }
+@media (max-width: 991px) { .camping-page .gains-grid { grid-template-columns: 1fr; } }
+
+/* Une application installée, ça se prépare. */
+.camping-page .adoption-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.camping-page .adoption-copy h2 { margin-bottom: 24px; font-size: clamp(2.3rem, 4vw, 3.6rem); }
+.camping-page .adoption-copy p { margin: 0; color: var(--muted); font-size: 1.05rem; }
+.camping-page .adoption-list { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; }
+.camping-page .adoption-list li { padding: 20px 24px; border: 1px solid var(--line); border-radius: 18px; color: #3f4a4f; }
+.camping-page .adoption-list b { display: block; margin-bottom: 4px; color: var(--ink); font-weight: 600; }
+@media (max-width: 991px) { .camping-page .adoption-grid { grid-template-columns: 1fr; gap: 36px; } }
+
+/* Citations. */
+.camping-page .quotes { background: var(--gray-light); }
+.camping-page .quotes-title { margin-bottom: 40px; font-size: clamp(1.7rem, 2.8vw, 2.4rem); text-align: center; }
+.camping-page .quotes-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.camping-page .quotes-grid figure { display: flex; flex-direction: column; justify-content: space-between; gap: 24px; margin: 0; padding: 32px; border-radius: 24px; background: #fff; }
+.camping-page .quotes-grid blockquote { margin: 0; padding: 0; border: 0; font-size: 1.05rem; line-height: 1.55; }
+.camping-page .quotes-grid figcaption { color: var(--muted); font-size: .9rem; }
+.camping-page .quotes-grid figcaption b { display: block; color: var(--ink); font-weight: 600; }
+@media (max-width: 991px) { .camping-page .quotes-grid { grid-template-columns: 1fr; } }
+
+/* Offre pionniers. */
+.camping-page .pioneer-chip { display: inline-flex; flex-wrap: wrap; gap: 4px 8px; margin-top: 22px; padding: 10px 16px; border-radius: 14px; background: #fff4df; color: #3f4a4f; font-size: .875rem; line-height: 1.4; text-decoration: none; }
+.camping-page .pioneer-chip b { color: var(--ink); font-weight: 600; }
+.camping-page .pioneer-chip:hover, .camping-page .pioneer-chip:focus-visible { background: #fdebc6; }
+@media (max-width: 1080px) { .camping-page .pioneer-chip { justify-content: center; } }
+.camping-page .price-card .price { margin-bottom: 10px; padding-bottom: 0; border-bottom: 0; }
+.camping-page .price-regular { margin: 0 0 28px; padding-bottom: 26px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
+.camping-page .price-regular s { color: var(--ink); }
+.camping-page .price-badge { background: #fff4df; color: #6b4a00; }

@@ -23,4 +23,29 @@
 /* La règle .button de Webflow (flex-flow: column) s'appliquait aussi aux boutons de la page camping :
    la flèche de « Programmer une démo » passait à la ligne en mobile. */
 .camping-page .button { flex-direction: row; }
+/* Même fuite : Webflow passe .button à 10 px entre 768 et 991 px. */
+.camping-page .button { font-size: 1rem; }
 .camping-page .contact-demo-button span { flex: none; }
+
+/* Audit du 26/11 : contrastes WCAG AA et tailles minimales (12 px, 13 px pour les conditions de l'offre). */
+.camping-page .proof-grid strong,
+.camping-page .identity-cards .number { color: var(--blue-deep); }
+.camping-page .primary-benefits-grid article:nth-child(2) p { color: #08293a; }
+.camping-page .feature-story-copy > span,
+.camping-page .contact-card-label,
+.camping-page .chip-content span { font-size: .75rem; }
+.camping-page .call-us span { font-size: .75rem; letter-spacing: .08em; }
+.camping-page .price-card small,
+.camping-page .website-app-comparison small { font-size: .8125rem; line-height: 1.5; }
+
+/* Pas de mot seul sur la dernière ligne d'un titre ou d'un paragraphe. */
+.camping-page h1, .camping-page h2, .camping-page h3 { text-wrap: balance; }
+.camping-page p, .camping-page li { text-wrap: pretty; }
+.camping-page .overline-light { color: #fff; }
+/* Sous 1200 px, le cercle décoratif de la section contact passe derrière le titre et le texte blancs. */
+@media (max-width: 1200px) {
+  .camping-page .contact-shape { display: none; }
+}
+.camping-page .platform-note { color: #3f4a4f; }
+/* Fin du dégradé de la section contact un peu plus sombre : le surtitre blanc y passe à 5:1. */
+.camping-page .contact { background: linear-gradient(145deg, #075f7d 0%, #08769b 62%, #0a72aa 100%); }

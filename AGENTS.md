@@ -120,8 +120,9 @@ Une PR = un sujet. Ne mélange pas une correction de faute et une nouvelle secti
 | Tarifs (`/pricing`) | `content/pricing.html` | 1 pour le texte (prix fournis par l'utilisateur) |
 | Campings (`/camping`) | `content/camping.html` | 1 pour le texte et les images |
 | Politique de confidentialité (`/privacy`) | `content/privacy.html` | 1 |
-| Menu, bandeau du haut | `layouts/partials/navbar.html` | 2 |
-| Pied de page (adresse, téléphone, réseaux) | `layouts/partials/footer.html` | 2 |
+| Menu, bandeau du haut (toutes les pages sauf `/camping`) | `layouts/partials/navbar.html` | 2 |
+| En-tête et pied de page de `/camping` | `layouts/partials/camping-header.html`, `camping-footer.html` | 2 |
+| Pied de page (adresse, téléphone, réseaux), toutes les pages sauf `/camping` | `layouts/partials/footer.html` | 2 |
 | Pop-up newsletter | `layouts/partials/newsletter-popup.html` | 2 |
 | Lien de prise de démonstration, Matomo, formulaire newsletter | `hugo.toml` (`[params]`) | 2 |
 | Styles | `static/assets/css/` | 2 |
@@ -178,7 +179,7 @@ Pour trouver le fichier qui contient un texte : `grep -rln "texte exact" content
 4. Ne pas ajouter `w--current` ni `aria-current` à la main : c'est calculé à la génération.
 5. Une page de `content/` contient un en-tête `---` puis uniquement son contenu HTML (pas de `<html>`, `<head>`, menu ni pied de page). Ne pas ajouter de balise `<script>` ou `<style>` dans le contenu (celles qui y sont déjà viennent des blocs « embed » de Webflow, les laisser en place) : les nouveaux styles vont dans un fichier de `static/assets/css/pages/` déclaré dans `css:`, le JavaScript dans `static/assets/js/pages/` déclaré dans `scripts:`.
 6. Nouvelle page : copier `content/privacy.html`, changer l'en-tête (`title`, `description`) et le contenu. Le nom du fichier donne l'adresse (`content/ma-page.html` → `/ma-page`). L'ajouter au menu et au pied de page si besoin. `noindex: true` dans l'en-tête l'exclut des moteurs de recherche et du plan du site.
-7. Les styles de la page camping sont isolés sous `.camping-page` : tout nouveau sélecteur de cette page doit commencer par `.camping-page`.
+7. La page camping est séparée de l'offre festivals : `header: camping` dans son en-tête remplace le menu, le bandeau et le pied de page du site par ceux de la maquette camping, sans lien vers les solutions, réalisations, partenaires ou tarifs festivals. Ne pas y ajouter de tels liens. Ses styles sont isolés sous `.camping-page` : tout nouveau sélecteur de cette page doit commencer par `.camping-page` (ou `.camping-chrome` pour l'en-tête et le pied de page).
 8. Un seul `<h1>` par page. Pour un titre secondaire qui doit garder l'apparence d'un h1, utiliser `<h2 class="h1-look …">`.
 9. Un élément cliquable qui n'est ni un lien ni un bouton doit avoir `role="button" tabindex="0"` (le clavier est géré par `static/assets/js/site.js`).
 10. Aucune nouvelle dépendance ni outil de build sans accord explicite d'un membre de `@code-troopers/developpeurs`.

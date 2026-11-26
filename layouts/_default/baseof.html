@@ -1,6 +1,7 @@
 {{- $path := partial "path.html" . -}}
 {{- $utility := eq .Kind "404" -}}
 {{- $noindex := or $utility .Params.noindex -}}
+{{- $camping := eq .Params.header "camping" -}}
 {{- $title := cond $utility "Page introuvable | Chapitô" .Title -}}
 {{- $description := cond $utility "Page non trouvée. Il semble que vous ayez atteint une page qui n’existe pas. Retournez à l’accueil de Chapitô pour découvrir nos solutions d’applications mobiles dédiées aux événements." .Params.description -}}
 {{- $ogTitle := .Params.ogTitle | default $title -}}
@@ -45,14 +46,14 @@
 {{- if not $utility }}
 <div class="page-wrapper{{ with .Params.wrapperClass }} {{ . }}{{ end }}">
 {{ partial "global-styles.html" . }}
-{{ partial "navbar.html" . }}
+{{ if $camping }}<div class="camping-page camping-chrome">{{ partial "camping-header.html" . }}</div>{{ else }}{{ partial "navbar.html" . }}{{ end }}
 <div class="main-wrapper">
 {{- end }}
 <main id="contenu">
 {{ block "main" . }}{{ end }}
 </main>
 {{- if not $utility }}
-{{ partial "footer.html" . }}
+{{ if $camping }}<div class="camping-page camping-chrome">{{ partial "camping-footer.html" . }}</div>{{ else }}{{ partial "footer.html" . }}{{ end }}
 </div>
 </div>
 {{- end }}

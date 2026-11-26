@@ -1,0 +1,18 @@
+{{- /* En-tête de la page camping (maquette V2 de Nicolas) : remplace le menu du site, sans bandeau. */ -}}
+<header class="site-header" data-header>
+  <div class="container header-inner">
+    <a class="chapito-logo" href="#top" aria-label="Chapitô Campings, haut de la page">
+      <span class="chapito-symbol" aria-hidden="true">
+        <img class="hex hex-gray" src="/assets/camping/brand/chapito-hex-gray.svg" alt=""/>
+        <img class="hex hex-light" src="/assets/camping/brand/chapito-hex-light-blue.svg" alt=""/>
+        <img class="hex hex-blue" src="/assets/camping/brand/chapito-hex-blue.svg" alt=""/>
+      </span>
+      <img class="chapito-wordmark" src="/assets/camping/brand/chapito-wordmark.svg" alt="Chapitô"/>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span class="sr-only">Ouvrir le menu</span><span></span><span></span></button>
+    <nav id="main-nav" class="main-nav" aria-label="Navigation principale">
+      <a href="#situations">Vos besoins</a><a href="#fonctionnalites">Fonctionnalités</a><a href="#backoffice">Back-office</a><a href="#offre">Tarif</a>
+      <a class="button button-dark button-small" href="{{ site.Params.calDemo }}" target="_blank" rel="noreferrer noopener">Programmer une démo</a>
+    </nav>
+  </div>
+</header>

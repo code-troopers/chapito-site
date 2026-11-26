@@ -14,6 +14,8 @@ h2:where(.h1-look), div:where(.h1-look) { margin-top: 20px; margin-bottom: 10px;
 /* L'en-tête collant (bandeau + menu) ne doit pas masquer l'élément qui reçoit le focus */
 html { scroll-padding-top: 200px; }
 @media (max-width: 991px) { html { scroll-padding-top: 120px; } }
+html:has(.camping-chrome) { scroll-padding-top: 100px; }
+@media (max-width: 850px) { html:has(.camping-chrome) { scroll-padding-top: 88px; } }
 
 /* /realisations : cases de filtre masquées par Webflow (display:none) mais nécessaires au clavier */
 .w-checkbox-input.tags-chekbox { display: block; position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }

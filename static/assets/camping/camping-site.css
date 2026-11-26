@@ -1,5 +1,18 @@
-/* Ajustements de la landing camping intégrée au site (menu Webflow au lieu de l'en-tête fixe d'origine) */
-.camping-page .hero { padding-top: 90px; min-height: 0; }
+/* Ajustements de la landing camping intégrée au site. L'en-tête fixe et le pied de page de la maquette
+   remplacent le menu et le pied de page du site (header: camping dans content/camping.html). */
+.camping-page .hero { min-height: 0; }
+.camping-chrome .site-footer { padding: 70px 0 28px; background: #070707; color: #fff; }
+.camping-chrome .footer-main { display: grid; grid-template-columns: 1fr 1fr 1.2fr; align-items: center; padding-bottom: 45px; }
+.camping-chrome .footer-main p { margin: 0; color: #9da5a8; text-align: center; }
+.camping-chrome .footer-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 20px; font-size: .8rem; }
+.camping-chrome .footer-links a { color: #c8cdcf; text-decoration: none; }
+.camping-chrome .footer-links a:hover, .camping-chrome .footer-links a:focus-visible { color: #fff; text-decoration: underline; }
+.camping-chrome .footer-bottom { padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, .12); color: #9da5a8; font-size: .7rem; }
+@media (max-width: 850px) {
+  .camping-chrome .footer-main { grid-template-columns: 1fr; gap: 25px; justify-items: center; text-align: center; }
+  .camping-chrome .footer-links { justify-content: center; }
+  .camping-chrome .footer-bottom { text-align: center; }
+}
 .camping-page .video-todo-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 64px; align-items: center; }
 .camping-page .camping-video { border-radius: 28px; overflow: hidden; box-shadow: 0 30px 80px rgba(5, 37, 56, .18); background: #0b0b0d; aspect-ratio: 16 / 9; }
 .camping-page .camping-video video { display: block; width: 100%; height: 100%; object-fit: cover; }

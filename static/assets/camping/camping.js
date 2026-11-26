@@ -119,3 +119,30 @@ if (reducedMotion.matches || !('IntersectionObserver' in window)) {
   }, { threshold: 0.14 });
   revealItems.forEach((item) => revealObserver.observe(item));
 }
+
+// Tiroirs « Comment ? » : Échap referme le tiroir ouvert et rend le focus à son bouton.
+document.addEventListener('keydown', (event) => {
+  if (event.key !== 'Escape') return;
+  const open = event.target.closest?.('.feature-how[open]');
+  if (!open) return;
+  open.open = false;
+  open.querySelector('summary')?.focus();
+});
+
+// Barre d'appel mobile : visible une fois les boutons du hero dépassés, masquée sur la section contact et le pied de page.
+const mobileCta = document.querySelector('[data-mobile-cta]');
+const heroActions = document.querySelector('.hero-actions');
+if (mobileCta && heroActions && 'IntersectionObserver' in window) {
+  const hideZones = [document.querySelector('#contact'), document.querySelector('.site-footer')].filter(Boolean);
+  const state = { heroVisible: true, inHideZone: new Set() };
+  const render = () => { mobileCta.hidden = state.heroVisible || state.inHideZone.size > 0; };
+  new IntersectionObserver(([entry]) => {
+    state.heroVisible = entry.isIntersecting || entry.boundingClientRect.top > 0;
+    render();
+  }).observe(heroActions);
+  const zoneObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => (entry.isIntersecting ? state.inHideZone.add(entry.target) : state.inHideZone.delete(entry.target)));
+    render();
+  });
+  hideZones.forEach((zone) => zoneObserver.observe(zone));
+}

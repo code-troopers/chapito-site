@@ -49,3 +49,153 @@
 .camping-page .platform-note { color: #3f4a4f; }
 /* Fin du dégradé de la section contact un peu plus sombre : le surtitre blanc y passe à 5:1. */
 .camping-page .contact { background: linear-gradient(145deg, #075f7d 0%, #08769b 62%, #0a72aa 100%); }
+
+/* Page raccourcie (26/11) : téléphone mis en avant, preuves dans le hero, tiroirs « Comment ? » sur les fonctionnalités. */
+.camping-page .button-phone { gap: 10px; font-variant-numeric: tabular-nums; }
+.camping-page .button-phone::before { content: ""; width: 18px; height: 18px; flex: none; background: currentColor; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z'/%3E%3C/svg%3E") center / contain no-repeat; }
+
+.camping-page .hero-proof { margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--line); max-width: 560px; }
+.camping-page .hero-proof p { margin: 0 0 10px; color: #3f4a4f; font-size: .8125rem; }
+.camping-page .hero-proof ul { display: flex; flex-wrap: wrap; gap: 8px 28px; margin: 0; padding: 0; list-style: none; color: #3f4a4f; font-size: .9rem; }
+.camping-page .hero-proof strong { color: var(--blue-deep); font-size: 1.35rem; font-weight: 600; letter-spacing: -.03em; margin-right: 4px; }
+
+.camping-page .video-todo-copy h2 { margin-bottom: 24px; }
+.camping-page .video-todo-copy p { color: var(--muted); font-size: 1.05rem; }
+
+/* Tiroir « Comment ? » : le panneau recouvre la carte, sa taille ne change donc pas à l'ouverture. */
+.camping-page .feature-how summary { position: absolute; z-index: 4; left: 34px; bottom: 28px; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 999px; background: var(--ink); color: #fff; font-size: .9rem; font-weight: 600; cursor: pointer; list-style: none; box-shadow: 0 10px 24px rgba(0, 0, 0, .18); transition: transform .2s ease; }
+.camping-page .feature-how summary::-webkit-details-marker { display: none; }
+.camping-page .feature-how summary::after { content: "+"; font-size: 1.2rem; font-weight: 400; line-height: 1; }
+.camping-page .feature-how summary:hover { transform: translateY(-2px); }
+.camping-page .feature-how summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.camping-page .feature-how .how-close { display: none; }
+.camping-page .feature-how[open] .how-open { display: none; }
+.camping-page .feature-how[open] .how-close { display: inline; }
+.camping-page .feature-how[open] summary::after { content: "×"; }
+.camping-page .feature-story-dark .feature-how summary { background: #fff; color: var(--ink); }
+.camping-page .feature-how-panel { position: absolute; z-index: 3; inset: 0; display: flex; flex-direction: column; gap: 22px; padding: 34px 34px 96px; overflow-y: auto; background: inherit; background-color: #fff; animation: feature-how-in .22s ease; }
+.camping-page .feature-story-blue .feature-how-panel { background-color: var(--blue-pale); }
+.camping-page .feature-story-sand .feature-how-panel { background-color: #fff4df; }
+.camping-page .feature-story-dark .feature-how-panel { background-color: #111; }
+.camping-page .feature-how dl { display: grid; gap: 6px; margin: 0; }
+.camping-page .feature-how dt { color: var(--blue-deep); font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.camping-page .feature-how dt:not(:first-child) { margin-top: 18px; }
+.camping-page .feature-how dd { margin: 0; color: var(--ink); font-size: 1rem; line-height: 1.5; }
+.camping-page .feature-story-dark .feature-how dt { color: var(--blue-light); }
+.camping-page .feature-story-dark .feature-how dd { color: #fff; }
+.camping-page .feature-how-panel img { width: 100%; height: auto; margin-top: auto; border-radius: 14px; border: 1px solid var(--line); box-shadow: 0 14px 30px rgba(5, 37, 56, .12); }
+@keyframes feature-how-in { from { opacity: 0; transform: translateY(12px); } }
+@media (prefers-reduced-motion: reduce) { .camping-page .feature-how-panel { animation: none; } }
+@media (max-width: 620px) {
+  .camping-page .feature-how summary { left: 28px; bottom: 24px; }
+  .camping-page .feature-how-panel { padding: 28px 28px 88px; }
+}
+.camping-page .demo-note { margin: 28px 0 0; color: var(--muted); font-size: .8125rem; text-align: center; }
+
+/* Bandeau d'appel entre les fonctionnalités et le back-office. */
+.camping-page .cta-band { padding: 0 0 120px; }
+.camping-page .cta-band-inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; padding: 48px 56px; border-radius: var(--radius); background: var(--blue-pale); }
+.camping-page .cta-band h2 { margin: 0 0 8px; font-size: clamp(1.7rem, 2.8vw, 2.4rem); }
+.camping-page .cta-band p { margin: 0; color: #3f4a4f; }
+.camping-page .cta-band-actions { display: flex; flex-wrap: wrap; gap: 12px; flex: none; }
+@media (max-width: 991px) {
+  .camping-page .cta-band { padding-bottom: 90px; }
+  .camping-page .cta-band-inner { flex-direction: column; align-items: flex-start; padding: 36px 28px; }
+}
+@media (max-width: 620px) {
+  .camping-page .cta-band-actions { flex-direction: column; align-self: stretch; }
+}
+
+.camping-page .pricing-reasons { display: grid; gap: 12px; margin: 0 0 28px; padding: 0; list-style: none; max-width: 560px; }
+.camping-page .pricing-reasons li { position: relative; padding-left: 22px; color: #3f4a4f; }
+.camping-page .pricing-reasons li::before { content: ""; position: absolute; left: 0; top: .6em; width: 8px; height: 8px; border-radius: 50%; background: var(--blue); }
+.camping-page .pricing-reasons b { color: var(--ink); font-weight: 600; }
+.camping-page .pricing-launch { max-width: 560px; margin: 0; padding: 18px 22px; border-radius: 14px; background: #fff4df; color: #3f4a4f; font-size: .95rem; }
+.camping-page .price-call { margin: 14px 0 0; color: var(--muted); font-size: .9rem; text-align: center; }
+.camping-page .price-call a { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+
+.camping-page .contact-phone { margin: 18px auto 0; color: #fff; font-size: 1.05rem; }
+.camping-page .contact-phone a { font-weight: 600; font-size: 1.35rem; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; white-space: nowrap; }
+.camping-page .contact-intro > p.contact-phone:last-child { color: #fff; }
+
+/* Barre d'appel collante en mobile, entre le hero et la section contact. */
+.camping-page .mobile-cta { display: none; }
+@media (max-width: 850px) {
+  .camping-page .mobile-cta:not([hidden]) { position: fixed; z-index: 90; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: auto 1fr; gap: 10px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: rgba(255, 255, 255, .96); border-top: 1px solid var(--line); box-shadow: 0 -8px 24px rgba(0, 0, 0, .06); backdrop-filter: blur(12px); }
+  .camping-page .mobile-cta .button { min-height: 48px; padding: 0 18px; }
+}
+
+/* Numéro de téléphone dans l'en-tête, sur grand écran. */
+.camping-chrome .header-phone { font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+@media (min-width: 851px) and (max-width: 1180px) { .camping-chrome .header-phone { display: none; } }
+
+/* Webflow limite .button à 242 px (et le passe en block en mobile) : « Programmer une démo » passait sur deux lignes. */
+.camping-page .button { max-width: none; width: auto; display: inline-flex; white-space: nowrap; line-height: 1.2; }
+.camping-page .button.button-full { width: 100%; }
+.camping-page .pricing-copy h2 { font-size: clamp(2.3rem, 4vw, 3.6rem); margin-bottom: 26px; }
+.camping-page .contact-intro > p:not(.contact-phone) { max-width: 680px; margin: 0 auto; color: #e9f8ff; font-size: 1.04rem; }
+@media (max-width: 1080px) {
+  .camping-page .hero-proof { margin-left: auto; margin-right: auto; }
+  .camping-page .hero-proof ul { justify-content: center; gap: 6px 20px; }
+}
+@media (max-width: 620px) {
+  .camping-page .hero-proof strong { font-size: 1.15rem; }
+  .camping-page .hero-proof ul { font-size: .85rem; }
+}
+.camping-page .hero-copy h1 { margin-top: 0; }
+
+/* Situations : cartes « problème → réponse » lisibles sans clic (les onglets obligeaient à remonter en mobile). */
+.camping-page .pain-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.camping-page .pain-card { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 160px; gap: 28px; min-height: 360px; padding: 36px 32px 0 36px; overflow: hidden; border-radius: 28px; background: var(--gray-light); }
+.camping-page .pain-copy { padding-bottom: 36px; }
+.camping-page .pain-card h3 { margin-bottom: 14px; font-size: 1.45rem; }
+.camping-page .pain-quote { margin-bottom: 22px; color: #3f4a4f; font-size: .95rem; font-style: italic; }
+.camping-page .pain-fix { margin: 0; padding-top: 18px; border-top: 1px solid rgba(11, 11, 13, .14); font-size: .95rem; }
+.camping-page .pain-fix b { display: block; margin-bottom: 4px; color: var(--blue-deep); font-weight: 600; }
+.camping-page .pain-phone { position: relative; align-self: end; width: 160px; margin-bottom: -110px; }
+@media (max-width: 991px) { .camping-page .pain-grid { grid-template-columns: 1fr; } }
+@media (max-width: 620px) {
+  .camping-page .pain-card { grid-template-columns: 1fr; gap: 0; min-height: 0; padding: 28px 24px 0; }
+  .camping-page .pain-copy { padding-bottom: 24px; }
+  .camping-page .pain-card h3 { font-size: 1.3rem; }
+  .camping-page .pain-phone { justify-self: center; width: 150px; height: 150px; margin-bottom: 0; border-bottom: 0; border-radius: 30px 30px 0 0; }
+  .camping-page .pain-phone img { height: auto; }
+}
+
+/* Ce que Chapitô rapporte. */
+.camping-page .gains { background: #fff4df; }
+.camping-page .gains .section-heading { margin-bottom: 56px; }
+.camping-page .gains-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.camping-page .gains-grid article { padding: 34px; border-radius: 24px; background: #fff; box-shadow: 0 18px 50px rgba(80, 55, 10, .07); }
+.camping-page .gains-grid h3 { margin-bottom: 14px; font-size: 1.4rem; }
+.camping-page .gains-grid p { margin: 0; color: #3f4a4f; }
+@media (max-width: 991px) { .camping-page .gains-grid { grid-template-columns: 1fr; } }
+
+/* Une application installée, ça se prépare. */
+.camping-page .adoption-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.camping-page .adoption-copy h2 { margin-bottom: 24px; font-size: clamp(2.3rem, 4vw, 3.6rem); }
+.camping-page .adoption-copy p { margin: 0; color: var(--muted); font-size: 1.05rem; }
+.camping-page .adoption-list { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; }
+.camping-page .adoption-list li { padding: 20px 24px; border: 1px solid var(--line); border-radius: 18px; color: #3f4a4f; }
+.camping-page .adoption-list b { display: block; margin-bottom: 4px; color: var(--ink); font-weight: 600; }
+@media (max-width: 991px) { .camping-page .adoption-grid { grid-template-columns: 1fr; gap: 36px; } }
+
+/* Citations. */
+.camping-page .quotes { background: var(--gray-light); }
+.camping-page .quotes-title { margin-bottom: 40px; font-size: clamp(1.7rem, 2.8vw, 2.4rem); text-align: center; }
+.camping-page .quotes-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.camping-page .quotes-grid figure { display: flex; flex-direction: column; justify-content: space-between; gap: 24px; margin: 0; padding: 32px; border-radius: 24px; background: #fff; }
+.camping-page .quotes-grid blockquote { margin: 0; padding: 0; border: 0; font-size: 1.05rem; line-height: 1.55; }
+.camping-page .quotes-grid figcaption { color: var(--muted); font-size: .9rem; }
+.camping-page .quotes-grid figcaption b { display: block; color: var(--ink); font-weight: 600; }
+@media (max-width: 991px) { .camping-page .quotes-grid { grid-template-columns: 1fr; } }
+
+/* Offre pionniers. */
+.camping-page .pioneer-chip { display: inline-flex; flex-wrap: wrap; gap: 4px 8px; margin-top: 22px; padding: 10px 16px; border-radius: 14px; background: #fff4df; color: #3f4a4f; font-size: .875rem; line-height: 1.4; text-decoration: none; }
+.camping-page .pioneer-chip b { color: var(--ink); font-weight: 600; }
+.camping-page .pioneer-chip:hover, .camping-page .pioneer-chip:focus-visible { background: #fdebc6; }
+@media (max-width: 1080px) { .camping-page .pioneer-chip { justify-content: center; } }
+.camping-page .price-card .price { margin-bottom: 10px; padding-bottom: 0; border-bottom: 0; }
+.camping-page .price-regular { margin: 0 0 28px; padding-bottom: 26px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
+.camping-page .price-regular s { color: var(--ink); }
+.camping-page .price-badge { background: #fff4df; color: #6b4a00; }
